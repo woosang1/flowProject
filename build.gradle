@@ -7,5 +7,6 @@ plugins {
 }
 
 ext {
+    activity ='1.1.0'
     hiltVersion = "2.42"
 }
