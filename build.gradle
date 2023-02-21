@@ -13,4 +13,7 @@ ext {
     okhttp = '4.8.1'
     gson = '2.8.9'
     rxandroid ='2.1.1'
+    glide = '4.11.0'
+    glide_okhttp3 = '4.11.0'
+    glide_compiler = '4.11.0'
 }

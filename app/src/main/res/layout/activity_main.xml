@@ -19,25 +19,29 @@
             android:id="@+id/search_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="visible">
 
             <EditText
+                android:id="@+id/edit_text"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_weight="2"/>
 
             <Button
-                android:layout_width="0dp"
+                android:id="@+id/search_btn"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:paddingHorizontal="5dp"
                 android:background="@color/gray"
                 android:text="검색" />
 
             <Button
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/gray"
                 android:text="최근검색"
+                android:paddingHorizontal="5dp"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"/>
         </LinearLayout>

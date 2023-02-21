@@ -8,39 +8,47 @@
 
     </data>
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/root_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:context=".MainActivity">
+        android:orientation="horizontal">
 
         <!--  이미지  -->
         <ImageView
             android:id="@+id/image_view"
             android:layout_width="150dp"
-            android:layout_height="150dp" />
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            />
 
         <!-- 내용   -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="제목 : 아이" />
 
             <TextView
+                android:id="@+id/year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="제목 : 2021" />
 
             <TextView
+                android:id="@+id/star"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="평점 : 5" />
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 </layout>

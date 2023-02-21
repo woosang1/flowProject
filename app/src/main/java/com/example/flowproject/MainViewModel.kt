@@ -1,35 +1,47 @@
 package com.example.flowproject
 
-import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.model.rp.RpMovieModel
-import com.example.network.NetworkManager
+import com.example.model.MovieModel
+import com.example.usecase.MovieUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.observers.DisposableSingleObserver
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val networkManager: NetworkManager
+    private val movieUseCase: MovieUseCase
 ) : ViewModel() {
 
-    fun getData() {
-        networkManager.getMovieData(
-            query = "여름",
-            display = 10
-        ).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : DisposableSingleObserver<RpMovieModel>() {
-                override fun onSuccess(t: RpMovieModel) {
-                    Log.i("aa" , "t :${t}")
-                }
+    // Movie Data
+    private val _movieModelLiveData = MutableLiveData<MovieModel>()
+    val movieModelLiveData: LiveData<MovieModel?> = _movieModelLiveData
 
-                override fun onError(e: Throwable) {
-                    TODO("Not yet implemented")
-                    Log.i("aa" , "e :${e}")
-                }
-            })
+    // 토스트 노출
+    private val _showToast = MutableLiveData<String>()
+    val showToast: LiveData<String> = _showToast
+
+    // 토스트 노출
+    private val _goToWebView = MutableLiveData<String>()
+    val goToWebView: LiveData<String> = _goToWebView
+
+    fun getData(
+        query: String, display: Int
+    ) {
+        movieUseCase.getMovie(query = query,
+            display = display,
+            success = {
+                _movieModelLiveData.postValue(it)
+            },
+            fail = {
+                _showToast.postValue(it)
+            }
+        )
     }
+
+    fun goToWebView(url: String){
+        _goToWebView.postValue(url)
+    }
+
+
 }
