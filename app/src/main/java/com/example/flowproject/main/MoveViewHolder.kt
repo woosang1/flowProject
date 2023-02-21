@@ -1,9 +1,8 @@
-package com.example.flowproject
+package com.example.flowproject.main
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import androidx.core.content.ContextCompat.startActivity
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.extension.imageLoad
 import com.example.flowproject.databinding.LayoutMoveItemBinding
@@ -18,13 +17,19 @@ class MoveViewHolder(
 
     fun onBind(item: MovieModel.Items){
         with(binding){
+            title = "제목 : ${item.title}"
+            subTitle = "부제 : ${item.subtitle}"
+            star = "평점 : ${item.userRating.toString()}"
             imageView.imageLoad(context = context, item.image)
-            title.text = "제목 : ${item.title}"
-            year.text = "서브타이틀 : ${item.subtitle}"
-            star.text = "평점 : ${item.userRating}"
             rootLayout.setOnClickListener {
                 mainViewModel.goToWebView(item.link)
             }
+            executePendingBindings()
         }
     }
+}
+
+@BindingAdapter("setText")
+fun setText(textView: TextView, title : String) {
+    textView.text = title
 }

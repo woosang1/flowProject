@@ -6,6 +6,17 @@
 
     <data>
 
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="subTitle"
+            type="String" />
+
+        <variable
+            name="star"
+            type="String" />
     </data>
 
     <LinearLayout
@@ -19,36 +30,39 @@
             android:id="@+id/image_view"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center" />
 
         <!-- 내용   -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_gravity="center"
+            android:layout_marginStart="8dp"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/title_view"
+                setText="@{title}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="제목 : 아이" />
+                android:text=""
+                tools:name="제목 : 아이" />
 
             <TextView
-                android:id="@+id/year"
+                android:id="@+id/sub_title_view"
+                setText="@{subTitle}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="제목 : 2021" />
+                tools:name="제목 : 2021" />
 
             <TextView
-                android:id="@+id/star"
+                android:id="@+id/star_view"
+                setText="@{star}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="평점 : 5" />
+                tools:name="평점" />
         </LinearLayout>
     </LinearLayout>
 </layout>

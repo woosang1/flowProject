@@ -1,6 +1,5 @@
-package com.example.flowproject
+package com.example.flowproject.main
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.flowproject.RecentlyKeywordActivity
 import com.example.flowproject.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,6 +34,12 @@ class MainActivity : AppCompatActivity() {
         with(mainViewModel) {
             movieModelLiveData.observe(this@MainActivity, Observer {
                 it?.items?.let { items ->
+                    mainViewModel.run {
+                        insertKeyFromDB(binding.editText.text.toString())
+                        items.forEachIndexed { index, item ->
+                            insertMovieFromDB(item)
+                        }
+                    }
                     (binding.recyclerView.adapter as MoveAdapter).addData(items)
                 }
             })
@@ -59,16 +65,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun setClickEvent(){
         with(binding){
+            recentlyKeyBtn.setOnClickListener {
+                RecentlyKeywordActivity.start(this@MainActivity)
+            }
+
             searchBtn.setOnClickListener {
                 setData()
             }
         }
     }
     private fun setData() {
-        mainViewModel.getData(
-            query = binding.editText.text.toString(),
-            display = 10
-        )
+        if (binding.editText.text.toString().isNotEmpty()){
+            mainViewModel.getData(
+                query = binding.editText.text.toString(),
+                display = 10
+            )
+        }
     }
 
 }

@@ -63,4 +63,10 @@ dependencies {
     // RxAndroid
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid"
 
+    // Room
+    implementation "androidx.room:room-runtime:$room"
+    implementation "androidx.room:room-ktx:$room"
+    implementation "androidx.room:room-rxjava2:$room"
+    kapt "androidx.room:room-compiler:$room"
+
 }

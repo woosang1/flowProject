@@ -1,8 +1,12 @@
-package com.example.flowproject
+package com.example.flowproject.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.db.RecentlyKeywordDao
+import com.example.db.RecentlyKeywordData
+import com.example.db.RecentlyMovieDao
+import com.example.db.RecentlyMovieData
 import com.example.model.MovieModel
 import com.example.usecase.MovieUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,7 +14,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val movieUseCase: MovieUseCase
+    private val movieUseCase: MovieUseCase,
+    private val recentlyMovieDao: RecentlyMovieDao,
+    private val recentlyKeywordDao: RecentlyKeywordDao,
 ) : ViewModel() {
 
     // Movie Data
@@ -43,5 +49,20 @@ class MainViewModel @Inject constructor(
         _goToWebView.postValue(url)
     }
 
+    fun insertKeyFromDB(key: String){
+        recentlyKeywordDao.insert(RecentlyKeywordData(key))
+    }
+
+    fun insertMovieFromDB(item: MovieModel.Items){
+        recentlyMovieDao.insert(
+            RecentlyMovieData(
+                title = item.title,
+                subtitle = item.subtitle,
+                link = item.link,
+                image = item.image,
+                userRating = item.userRating
+            )
+        )
+    }
 
 }

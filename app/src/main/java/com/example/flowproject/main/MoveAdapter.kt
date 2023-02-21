@@ -1,4 +1,4 @@
-package com.example.flowproject
+package com.example.flowproject.main
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -12,7 +12,6 @@ class MoveAdapter(
 ) : RecyclerView.Adapter<MoveViewHolder>() {
 
     private var modelList = ArrayList<MovieModel.Items>()
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoveViewHolder {
         return MoveViewHolder(
             context = parent.context,

@@ -16,4 +16,5 @@ ext {
     glide = '4.11.0'
     glide_okhttp3 = '4.11.0'
     glide_compiler = '4.11.0'
+    room = '2.2.5'
 }
